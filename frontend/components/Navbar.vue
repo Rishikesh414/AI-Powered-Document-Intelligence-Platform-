@@ -38,7 +38,7 @@
         </button>
 
         <!-- API Docs link -->
-        <a href="http://localhost:8000/docs" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm">
+        <a :href="apiDocsUrl" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm">
           <span>API Docs</span>
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
@@ -58,10 +58,11 @@ defineEmits(['open-settings'])
 
 const isHealthy = ref(false)
 const llmMode = ref('')
+const apiDocsUrl = useApiDocsUrl()
 
 async function checkHealth() {
   try {
-    const res = await fetch('/api/v1/health')
+    const res = await fetch(useApiUrl('health'))
     if (res.ok) {
       const data = await res.json()
       isHealthy.value = data.status === 'healthy'

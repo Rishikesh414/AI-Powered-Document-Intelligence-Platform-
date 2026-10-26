@@ -13,14 +13,6 @@ export default defineNuxtConfig({
     }
   },
 
-  nitro: {
-    routeRules: {
-      '/api/**': {
-        proxy: 'http://localhost:8000/api/**'
-      }
-    }
-  },
-
   build: {
     transpile: ['echarts', 'vue-echarts', 'resize-detector']
   },

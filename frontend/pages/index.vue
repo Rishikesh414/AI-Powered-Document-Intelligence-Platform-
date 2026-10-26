@@ -210,7 +210,7 @@ async function executeAnalysis() {
       focus_topics: controlsState.value.focus_topics,
     }
 
-    const res = await fetch('/api/v1/analyze', {
+    const res = await fetch(useApiUrl('analyze'), {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload),

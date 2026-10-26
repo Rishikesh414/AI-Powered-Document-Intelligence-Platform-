@@ -224,4 +224,4 @@ All 10 tests verify:
 3. Framework Preset: **Nuxt.js**.
 4. Set Environment Variable:
    - `NUXT_PUBLIC_API_BASE`: `https://your-render-backend.onrender.com/api/v1`
-5. Deploy!
+5. Redeploy the frontend after setting the environment variable. All browser API calls use this URL directly; the backend must be reachable from the browser and allow the deployed frontend origin via CORS.

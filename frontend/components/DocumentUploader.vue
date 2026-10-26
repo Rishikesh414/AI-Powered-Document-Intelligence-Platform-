@@ -212,7 +212,7 @@ async function uploadFile(file: File) {
   formData.append('file', file)
 
   try {
-    const res = await fetch('/api/v1/documents/upload', {
+    const res = await fetch(useApiUrl('documents/upload'), {
       method: 'POST',
       body: formData,
     })
@@ -242,7 +242,7 @@ async function uploadFile(file: File) {
   } catch (e: any) {
     errorCode.value = 'NETWORK_ERROR'
     errorMessage.value = e.message || 'Unable to reach document server.'
-    errorRemediation.value = 'Ensure the backend server is running on http://localhost:8000'
+    errorRemediation.value = 'Check that the configured backend API is available.'
   } finally {
     isUploading.value = false
   }
@@ -253,7 +253,7 @@ async function loadSample(sample: SampleDoc) {
   isUploading.value = true
 
   try {
-    const res = await fetch(`/api/v1/documents/samples/${sample.document_id}/load`)
+    const res = await fetch(useApiUrl(`documents/samples/${sample.document_id}/load`))
 
     if (!res.ok) {
       const err = await res.json()
@@ -281,7 +281,7 @@ async function loadSample(sample: SampleDoc) {
 
 async function fetchSamples() {
   try {
-    const res = await fetch('/api/v1/documents/samples')
+    const res = await fetch(useApiUrl('documents/samples'))
     if (res.ok) {
       sampleList.value = await res.json()
     }
