@@ -1,0 +1,18 @@
+Alex Rivera
+
+Skills
+Python, JavaScript, HTML, CSS, React, Node.js, Git
+
+Education
+Bachelor of Science in Computer Science
+State University
+2020 - 2024
+GPA: 3.2
+
+Projects
+- Personal Portfolio Website: Built a responsive portfolio using React and deployed on Vercel
+- Todo App: Created a full-stack task management app with Node.js and MongoDB
+- Weather Dashboard: Developed a weather app using OpenWeatherMap API
+
+Interests
+Open source development, Hackathons, Machine Learning

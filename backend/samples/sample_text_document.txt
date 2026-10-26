@@ -1,0 +1,27 @@
+Michael Johnson
+Software Developer
+
+Email: michael.j@techmail.com
+Phone: (555) 234-5678
+City: Portland, OR
+
+Summary:
+Motivated software developer with 3 years of experience in web development. Skilled in building responsive applications using modern JavaScript frameworks.
+
+Skills:
+JavaScript, TypeScript, React, Angular, Node.js, Express, MongoDB, PostgreSQL, Docker, Git, REST APIs, GraphQL, HTML5, CSS3, SASS
+
+Education:
+Bachelor of Science in Information Technology
+Oregon State University, 2017-2021
+
+Work Experience:
+Frontend Developer | CloudApp Inc | March 2021 - Present
+- Developed and maintained React-based dashboard serving 10,000+ daily users
+- Implemented responsive designs improving mobile conversion by 25%
+- Integrated third-party APIs for payment processing and analytics
+
+Junior Developer | StartupXYZ | June 2020 - February 2021
+- Built REST APIs using Node.js and Express
+- Wrote unit tests with Jest achieving 85% coverage
+- Participated in daily stand-ups and sprint planning

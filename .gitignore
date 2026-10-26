@@ -1,0 +1,18 @@
+# Environment files
+.env
+.env.*
+!.env.example
+*.env
+
+# Dependencies & Build artifacts
+node_modules/
+.venv/
+__pycache__/
+.output/
+.nuxt/
+dist/
+.pytest_cache/
+
+# OS artifacts
+.DS_Store
+Thumbs.db

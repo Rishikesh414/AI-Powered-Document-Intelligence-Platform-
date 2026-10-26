@@ -1,0 +1,74 @@
+SARAH CHEN
+Senior Full-Stack Software Engineer
+
+Contact Information
+Email: sarah.chen@email.com
+Phone: +1 (555) 867-5309
+Location: San Francisco, CA, USA
+LinkedIn: linkedin.com/in/sarahchen-dev
+
+Professional Summary
+Innovative Full-Stack Software Engineer with 8+ years of experience designing, developing, and deploying scalable web applications and AI-powered platforms. Proven track record in leading cross-functional teams, architecting microservices systems, and delivering high-impact products used by millions. Passionate about combining modern web technologies with machine learning to solve complex business problems.
+
+Technical Skills
+Programming Languages: Python, JavaScript, TypeScript, Go, SQL, Java
+Frontend Frameworks: Vue.js, Nuxt.js, React, Next.js, Angular
+Backend Frameworks: FastAPI, Django, Flask, Express.js, NestJS
+Databases: PostgreSQL, MySQL, MongoDB, Redis, Supabase, Firebase
+Cloud & DevOps: AWS (S3, Lambda, EC2, RDS, IAM), Google Cloud Platform, Docker, Kubernetes, GitHub Actions, Terraform
+AI/ML: TensorFlow, PyTorch, LangChain, Hugging Face Transformers, OpenAI API, RAG pipelines
+Data Processing: Pandas, NumPy, Apache Spark, Airflow
+Tools: Git, GitHub, VS Code, Jira, Figma, Postman
+
+Work Experience
+
+Senior Software Engineer | TechVision AI Inc. | San Francisco, CA
+January 2021 – Present
+- Led a team of 6 engineers building an AI-powered document processing platform serving 50,000+ users
+- Architected a microservices backend using FastAPI and PostgreSQL, reducing API response times by 40%
+- Implemented RAG-based document Q&A system using LangChain and GPT-4, achieving 92% accuracy
+- Built real-time data pipeline with Apache Kafka processing 1M+ events daily
+- Mentored 3 junior engineers and conducted technical interviews for the engineering team
+- Deployed production services on AWS using Terraform and GitHub Actions CI/CD
+
+Full-Stack Developer | DataFlow Solutions | New York, NY
+June 2018 – December 2020
+- Developed customer-facing analytics dashboard using Vue.js and D3.js, increasing user engagement by 35%
+- Built RESTful APIs with Django REST Framework serving 100K+ daily active users
+- Integrated Stripe payment processing and implemented subscription management system
+- Designed and optimized PostgreSQL database schemas, improving query performance by 60%
+- Collaborated with product and design teams to deliver features on bi-weekly sprint cycles
+
+Software Engineer | WebCraft Studios | Austin, TX
+August 2016 – May 2018
+- Built responsive web applications using React and Node.js for enterprise clients
+- Developed automated testing suites achieving 95% code coverage
+- Implemented OAuth 2.0 authentication and role-based access control systems
+- Contributed to open-source projects and maintained internal component libraries
+
+Education
+
+Master of Science in Computer Science
+Stanford University, Stanford, CA
+September 2014 – June 2016
+GPA: 3.9/4.0
+Specialization: Artificial Intelligence and Machine Learning
+
+Bachelor of Science in Software Engineering
+University of California, Berkeley, CA
+September 2010 – June 2014
+GPA: 3.7/4.0
+Dean's List: 6 semesters
+
+Certifications
+- AWS Certified Solutions Architect – Associate (2023)
+- Google Cloud Professional Data Engineer (2022)
+- TensorFlow Developer Certificate (2021)
+- Certified Kubernetes Administrator (CKA) (2020)
+
+Languages
+English (Native), Mandarin Chinese (Native), Spanish (Conversational)
+
+Projects
+- Open-Source RAG Framework: Created a Python library for building RAG pipelines with 2,500+ GitHub stars
+- AI Resume Analyzer: Built an NLP tool that parses and scores resumes against job descriptions

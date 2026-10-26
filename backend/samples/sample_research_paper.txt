@@ -1,0 +1,91 @@
+Adaptive Retrieval-Augmented Generation for Domain-Specific Document Understanding
+
+Authors: James Liu, Maria Santos, David Park, Anna Kowalski
+Published in: Proceedings of the 38th AAAI Conference on Artificial Intelligence (AAAI 2024)
+Year: 2024
+
+Abstract
+Retrieval-Augmented Generation (RAG) has demonstrated remarkable performance in open-domain question answering, yet its application to domain-specific document understanding—such as legal contracts, medical records, and financial reports—remains challenging due to specialized vocabularies, complex document structures, and stringent accuracy requirements. We propose Adaptive-RAG, a novel framework that dynamically adjusts retrieval strategies, chunk granularity, and prompt templates based on the detected document domain and query complexity. Our approach employs a lightweight domain classifier to route queries through domain-optimized retrieval pipelines, each equipped with specialized embedding models and re-ranking mechanisms. Experiments across three benchmarks demonstrate that Adaptive-RAG achieves 15.3% higher F1 scores and 23.7% better faithfulness metrics compared to static RAG baselines, while maintaining comparable inference latency.
+
+Keywords: Retrieval-Augmented Generation, Document Understanding, Domain Adaptation, Natural Language Processing, Information Extraction
+
+1. Introduction
+The proliferation of domain-specific documents in enterprise environments has created an urgent need for intelligent document processing systems that can extract, summarize, and answer questions about specialized content. While Large Language Models (LLMs) have shown impressive general capabilities, they often hallucinate domain-specific facts or miss critical nuances when processing documents outside their training distribution.
+
+Retrieval-Augmented Generation addresses hallucination by grounding LLM outputs in retrieved evidence. However, conventional RAG systems use static retrieval configurations that fail to account for the significant structural and semantic differences between document domains. A legal contract requires clause-level retrieval with precise terminology matching, while a medical report demands entity-aware chunking that preserves diagnostic relationships.
+
+In this paper, we present Adaptive-RAG, which addresses these limitations through three key innovations: (1) automatic domain detection and routing, (2) domain-specific chunking and embedding strategies, and (3) adaptive prompt compilation that adjusts extraction granularity based on query complexity.
+
+2. Related Work
+Prior work on RAG systems includes DPR (Karpukhin et al., 2020), REALM (Guu et al., 2020), and Atlas (Izacard et al., 2022). Domain-specific adaptations have been explored in medical (BioRAG, Chen et al., 2023) and legal (LegalRetriever, Park & Kim, 2023) contexts, but these approaches require separate systems for each domain. Our framework unifies domain adaptation within a single architecture.
+
+3. Methodology
+3.1 Domain Classification
+We train a lightweight DistilBERT classifier on 50,000 annotated document headers to classify incoming documents into five domains: Legal, Medical, Financial, Technical, and General. The classifier achieves 97.2% accuracy with 12ms inference time.
+
+3.2 Adaptive Chunking
+Each domain employs optimized chunking strategies:
+- Legal: Clause-level chunking with section hierarchy preservation
+- Medical: Entity-aware chunking maintaining diagnostic context windows
+- Financial: Table-aware chunking with numerical precision preservation
+- Technical: Code-block-aware chunking with API reference linking
+- General: Semantic paragraph-level chunking
+
+3.3 Retrieval Pipeline
+We implement a hybrid retrieval approach combining dense retrieval (domain-fine-tuned Sentence-BERT) with sparse BM25 scoring, followed by a cross-encoder re-ranker (ms-marco-MiniLM-L-12-v2). The final relevance score is computed as:
+Score = α × Dense(q,d) + (1-α) × BM25(q,d) + β × CrossEncoder(q,d)
+where α and β are domain-specific hyperparameters.
+
+3.4 Adaptive Prompt Compilation
+Based on query complexity (measured by entity count and relation depth), the system selects from three prompt templates: Basic (direct extraction), Standard (multi-step reasoning), and Detailed (chain-of-thought with evidence citation).
+
+4. Datasets
+We evaluate on three benchmarks:
+- ContractQA: 5,000 question-answer pairs from legal contracts
+- MedDocQA: 3,200 clinical document understanding tasks
+- FinanceExtract: 4,500 financial report extraction tasks
+
+5. Results
+
+Table 1: Main Results (F1 Score)
+| Method          | ContractQA | MedDocQA | FinanceExtract | Average |
+|-----------------|-----------|----------|----------------|---------|
+| Vanilla RAG     | 67.3      | 59.1     | 71.2           | 65.9    |
+| DPR + GPT-4     | 72.8      | 64.5     | 75.3           | 70.9    |
+| BM25 + GPT-4    | 69.1      | 61.8     | 73.7           | 68.2    |
+| Hybrid RAG      | 74.6      | 67.2     | 77.1           | 73.0    |
+| Adaptive-RAG    | 82.4      | 76.8     | 85.9           | 81.7    |
+
+Adaptive-RAG achieves the highest F1 scores across all three benchmarks, with particularly strong improvements in the medical domain (+15.3% over Hybrid RAG).
+
+Table 2: Faithfulness and Latency
+| Method          | Faithfulness | Latency (ms) |
+|-----------------|-------------|---------------|
+| Vanilla RAG     | 0.71        | 245           |
+| Adaptive-RAG    | 0.94        | 312           |
+
+6. Key Findings
+1. Domain-specific chunking is the single most impactful component, contributing 8.2% of the total F1 improvement.
+2. Adaptive prompt compilation provides an additional 4.1% improvement, particularly for complex multi-hop queries.
+3. The hybrid retrieval approach (dense + sparse + re-ranker) outperforms any single retrieval method.
+4. Cross-domain transfer is possible: training on two domains and fine-tuning on a third achieves 95% of fully supervised performance.
+
+7. Limitations and Future Work
+Our approach currently supports five predefined domains. Extending to zero-shot domain adaptation remains an open challenge. Additionally, the cross-encoder re-ranking step adds 67ms of latency, which may be prohibitive for real-time applications. Future work will explore distilling the re-ranker into the dense retrieval model and investigating domain-agnostic chunking strategies.
+
+8. Conclusion
+We present Adaptive-RAG, a unified framework for domain-specific document understanding that dynamically adapts retrieval, chunking, and prompting strategies. Our approach achieves state-of-the-art results on three diverse benchmarks while maintaining practical inference costs. We believe this work opens new directions for building robust, domain-aware document intelligence systems.
+
+References
+[1] Karpukhin et al. (2020). Dense Passage Retrieval for Open-Domain Question Answering. EMNLP.
+[2] Guu et al. (2020). REALM: Retrieval-Augmented Language Model Pre-Training. ICML.
+[3] Izacard et al. (2022). Atlas: Few-shot Learning with Retrieval Augmented Language Models. JMLR.
+[4] Chen et al. (2023). BioRAG: Biomedical Retrieval-Augmented Generation. ACL.
+[5] Park & Kim (2023). LegalRetriever: Domain-Adapted Dense Retrieval for Legal Documents. NAACL.
+[6] Lewis et al. (2020). Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks. NeurIPS.
+[7] Robertson & Zaragoza (2009). The Probabilistic Relevance Framework: BM25 and Beyond. Foundations and Trends in IR.
+[8] Reimers & Gurevych (2019). Sentence-BERT: Sentence Embeddings using Siamese BERT-Networks. EMNLP.
+[9] Nogueira et al. (2020). Document Ranking with a Pretrained Sequence-to-Sequence Model. EMNLP Findings.
+[10] Wei et al. (2022). Chain-of-Thought Prompting Elicits Reasoning in Large Language Models. NeurIPS.
+[11] Borgeaud et al. (2022). Improving Language Models by Retrieving from Trillions of Tokens. ICML.
+[12] Shi et al. (2023). REPLUG: Retrieval-Augmented Black-Box Language Models. NAACL.
