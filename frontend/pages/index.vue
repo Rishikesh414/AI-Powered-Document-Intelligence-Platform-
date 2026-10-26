@@ -10,7 +10,7 @@
         <div class="hero-badge">
           <span class="badge badge-primary pulse-glow">Multi-Domain Intelligence Engine</span>
           <span class="badge badge-cyan">Pydantic v2 Validated</span>
-          <span class="badge badge-emerald">Gemini 2.0 Flash</span>
+          <span class="badge badge-emerald">Gemini 2.5 Flash</span>
         </div>
         <h1 class="hero-title">
           Intelligent Document Analysis & <span class="gradient-text">Visual Insights</span>
@@ -105,7 +105,7 @@
           <VisualInsightsPanel
             :document-type="analysisResult.document_type"
             :charts-data="analysisResult.visual_insights.charts_data"
-            :infographic-url="analysisResult.visual_insights.ai_infographic_url"
+            :infographic-svg="analysisResult.visual_insights.ai_infographic_svg"
           />
 
           <!-- Row 3: Structured Data Extraction (Clean Cards + Raw JSON) -->
@@ -141,7 +141,7 @@
           <span>DocuIntel AI Platform • Production Architecture Blueprint</span>
         </div>
         <div class="footer-right font-mono">
-          <span>FastAPI + Nuxt 3 + Gemini 2.0 Flash + Pydantic v2</span>
+          <span>FastAPI + Nuxt 3 + Gemini 2.5 Flash + Pydantic v2</span>
         </div>
       </div>
     </footer>

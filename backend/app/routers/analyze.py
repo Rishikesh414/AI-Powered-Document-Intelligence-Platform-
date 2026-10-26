@@ -16,7 +16,7 @@ from app.routers.documents import get_document_data
 from app.schemas.requests import AnalyzeRequest, AnalyzeResponse, VisualInsights
 from app.services.completeness import compute_completeness
 from app.services.llm_service import analyze_document
-from app.services.visual_service import build_chart_data, generate_infographic_url
+from app.services.visual_service import build_chart_data, generate_infographic_data
 
 logger = logging.getLogger(__name__)
 
@@ -71,7 +71,7 @@ async def analyze(
 
     # 4. Generate Visual Insights
     charts_data = build_chart_data(extraction, request.document_type)
-    infographic_url = generate_infographic_url(extraction, request.document_type)
+    infographic_data = generate_infographic_data(extraction, request.document_type)
 
     summary = extraction.get("summary", "")
     uncertainty_flags = list(extraction.get("uncertainty_flags", []))
@@ -95,7 +95,11 @@ async def analyze(
             completeness_score=completeness_score,
             completeness_breakdown=[b.model_dump() for b in completeness_breakdown],
             extraction_payload=extraction,
-            visual_insights={"charts_data": charts_data, "ai_infographic_url": infographic_url},
+            visual_insights={
+                "charts_data": charts_data,
+                "ai_infographic_svg": infographic_data["svg_content"],
+                "generation_method": infographic_data["generation_method"],
+            },
             uncertainty_flags=uncertainty_flags,
         )
     except Exception as e:
@@ -112,7 +116,8 @@ async def analyze(
         uncertainty_flags=uncertainty_flags,
         visual_insights=VisualInsights(
             charts_data=charts_data,
-            ai_infographic_url=infographic_url,
+            ai_infographic_svg=infographic_data["svg_content"],
+            generation_method=infographic_data["generation_method"],
         ),
         analysis_level=request.analysis_level,
         summary_style=request.summary_style,

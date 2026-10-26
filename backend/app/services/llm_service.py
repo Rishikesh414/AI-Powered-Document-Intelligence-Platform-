@@ -1,5 +1,5 @@
 """
-LLM service: Parameterized prompt compilation and Gemini 2.0 Flash integration.
+LLM service: Parameterized prompt compilation and Gemini 2.5 Flash integration.
 Supports structured JSON output with SHA-256 result caching.
 """
 
@@ -205,7 +205,7 @@ async def analyze_document(
     focus_topics: Optional[List[str]] = None,
 ) -> Dict[str, Any]:
     """
-    Main entry point: analyze a document using Gemini 2.0 Flash.
+    Main entry point: analyze a document using Gemini 2.5 Flash.
 
     Returns validated extraction dict.
     """
@@ -245,7 +245,7 @@ async def analyze_document(
 
 
 async def _call_gemini(prompt: str, document_type: str) -> Dict[str, Any]:
-    """Call Google Gemini 2.0 Flash API for document analysis."""
+    """Call Google Gemini 2.5 Flash API for document analysis."""
     try:
         import google.generativeai as genai
 

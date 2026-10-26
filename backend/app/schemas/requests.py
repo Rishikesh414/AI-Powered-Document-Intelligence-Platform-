@@ -37,7 +37,10 @@ class CompletenessBreakdown(BaseModel):
 class VisualInsights(BaseModel):
     """Visual insights data for the frontend."""
     charts_data: Dict[str, Any] = Field(default_factory=dict)
-    ai_infographic_url: Optional[str] = None
+    ai_infographic_url: Optional[str] = None  # Deprecated (Pollinations.ai broke)
+    ai_infographic_svg: Optional[str] = None  # Server-generated SVG content
+    generation_method: Optional[str] = None   # "server_svg" | legacy "pollinations"
+
 
 
 class AnalyzeResponse(BaseModel):

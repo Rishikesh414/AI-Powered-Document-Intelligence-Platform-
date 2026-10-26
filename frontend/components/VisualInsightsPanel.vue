@@ -252,37 +252,33 @@
       </div>
     </div>
 
-    <!-- 2. AI INFOGRAPHIC CARD VIEW (POLLINATIONS.AI) -->
+    <!-- 2. AI INFOGRAPHIC CARD VIEW (Server-side SVG) -->
     <div v-else class="infographic-view slide-up">
       <div class="infographic-container">
         <div class="infographic-header">
           <div>
-            <div class="info-title">Zero-Cost AI Synthesized Visual Card</div>
-            <div class="info-caption">Real-time contextual visual generated via Pollinations.ai API</div>
+            <div class="info-title">AI Synthesized Visual Summary</div>
+            <div class="info-caption">Data-driven infographic generated from document analysis</div>
           </div>
-          <a
-            v-if="infographicUrl"
-            :href="infographicUrl"
-            target="_blank"
-            rel="noopener noreferrer"
+          <button
+            v-if="infographicSvg"
             class="btn btn-secondary btn-sm"
+            @click="downloadInfographic"
           >
-            <span>Open High-Res</span>
+            <span>Download</span>
             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-              <polyline points="15 3 21 3 21 9"></polyline>
-              <line x1="10" y1="14" x2="21" y2="3"></line>
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+              <polyline points="7 10 12 15 17 10"></polyline>
+              <line x1="12" y1="15" x2="12" y2="3"></line>
             </svg>
-          </a>
+          </button>
         </div>
 
         <div class="image-wrapper">
-          <img
-            v-if="infographicUrl"
-            :src="infographicUrl"
-            alt="AI Visual Summary Infographic"
-            class="ai-image"
-            loading="lazy"
+          <div
+            v-if="infographicSvg"
+            class="svg-infographic-container"
+            v-html="infographicSvg"
           />
           <div v-else class="image-placeholder">
             <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
@@ -304,8 +300,25 @@ import { ref, computed } from 'vue'
 const props = defineProps<{
   documentType: string
   chartsData: Record<string, any>
-  infographicUrl?: string
+  infographicSvg?: string
 }>()
+
+// Download SVG as PNG
+function downloadInfographic() {
+  if (!props.infographicSvg) return
+
+  // Create a Blob from the SVG content
+  const blob = new Blob([props.infographicSvg], { type: 'image/svg+xml' })
+  const url = URL.createObjectURL(blob)
+
+  const link = document.createElement('a')
+  link.href = url
+  link.download = `docuintel-infographic-${props.documentType}.svg`
+  document.body.appendChild(link)
+  link.click()
+  document.body.removeChild(link)
+  URL.revokeObjectURL(url)
+}
 
 const activeSection = ref<'charts' | 'infographic'>('charts')
 
@@ -794,6 +807,26 @@ function getBarPct(val: number, max: number): number {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.svg-infographic-container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+}
+
+.svg-infographic-container :deep(svg) {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: transform 0.3s ease;
+  border-radius: 12px;
+}
+
+.svg-infographic-container:hover :deep(svg) {
+  transform: scale(1.01);
 }
 
 .ai-image {

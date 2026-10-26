@@ -1,15 +1,14 @@
 """
 Visual insights service.
 - Generates chart data for ECharts (frontend)
-- Generates AI infographic URL via Pollinations.ai
+- Generates server-side SVG infographic (replaces broken Pollinations.ai)
 """
 
 from __future__ import annotations
 
-import urllib.parse
 from typing import Any, Dict, List, Optional
 
-from app.config import settings
+from app.services.infographic_generator import generate_infographic_svg
 
 
 def _build_resume_charts(extraction: Dict[str, Any]) -> Dict[str, Any]:
@@ -210,45 +209,19 @@ def build_chart_data(extraction: Dict[str, Any], document_type: str) -> Dict[str
     return builder(extraction)
 
 
-def generate_infographic_url(extraction: Dict[str, Any], document_type: str) -> Optional[str]:
+def generate_infographic_data(extraction: Dict[str, Any], document_type: str) -> Dict[str, Any]:
     """
-    Generate an AI infographic URL using Pollinations.ai.
-    This is a free, keyless image generation API.
+    Generate an SVG infographic from document extraction data.
+
+    Returns a dict with:
+      - svg_content: the raw SVG string
+      - generation_method: "server_svg" (for frontend display logic)
+
+    This replaces the broken Pollinations.ai (HTTP 402) with a zero-dependency,
+    server-side SVG generator that produces beautiful, data-driven infographics.
     """
-    # Build a descriptive prompt from the extraction
-    summary = extraction.get("summary", "")
-    doc_labels = {
-        "resume": "professional resume",
-        "research_paper": "academic research paper",
-        "business_analytics_report": "business analytics report",
+    svg_content = generate_infographic_svg(extraction, document_type)
+    return {
+        "svg_content": svg_content,
+        "generation_method": "server_svg",
     }
-    doc_label = doc_labels.get(document_type, "document")
-
-    # Build key details for the prompt
-    details = []
-    if document_type == "resume":
-        name = extraction.get("candidate_name", "a professional")
-        skills = extraction.get("skills", [])[:5]
-        details.append(f"Candidate: {name}")
-        if skills:
-            details.append(f"Key skills: {', '.join(skills)}")
-    elif document_type == "research_paper":
-        title = extraction.get("paper_title", "Research Study")
-        details.append(f"Paper: {title}")
-    else:
-        title = extraction.get("report_title", "Business Report")
-        details.append(f"Report: {title}")
-
-    detail_str = ". ".join(details)
-
-    prompt = (
-        f"Create a clean, modern, professional infographic visual summary card for a {doc_label}. "
-        f"{detail_str}. "
-        f"Use a sleek dark blue and teal color scheme with white text. "
-        f"Include icons and data visualization elements. "
-        f"Minimalist corporate design style, 16:9 aspect ratio."
-    )
-
-    encoded = urllib.parse.quote(prompt)
-    url = f"{settings.POLLINATIONS_BASE_URL}/{encoded}?width=800&height=450&nologo=true"
-    return url

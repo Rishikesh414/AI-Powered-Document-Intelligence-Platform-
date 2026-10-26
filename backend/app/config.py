@@ -26,9 +26,6 @@ class Settings(BaseSettings):
     # File System Storage (Backend Upload Directory)
     UPLOAD_DIR: str = "uploads"
 
-    # Pollinations.ai (no key needed)
-    POLLINATIONS_BASE_URL: str = "https://image.pollinations.ai/prompt"
-
     model_config = SettingsConfigDict(
         env_file=".env",
         env_file_encoding="utf-8",

@@ -66,7 +66,7 @@ async function checkHealth() {
     if (res.ok) {
       const data = await res.json()
       isHealthy.value = data.status === 'healthy'
-      llmMode.value = data.gemini_configured ? 'Gemini 2.0' : 'Mock Mode'
+      llmMode.value = data.gemini_configured ? 'Gemini 2.5' : 'Mock Mode'
     } else {
       isHealthy.value = false
     }

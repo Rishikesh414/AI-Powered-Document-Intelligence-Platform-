@@ -14,7 +14,7 @@
 
       <div class="modal-body">
         <p class="modal-desc">
-          DocuIntel AI runs on <strong>Google Gemini 2.0 Flash</strong> for high-throughput, structured extraction and reasoning. A free-tier API key can be obtained from Google AI Studio.
+          DocuIntel AI runs on <strong>Google Gemini 2.5 Flash</strong> for high-throughput, structured extraction and reasoning. A free-tier API key can be obtained from Google AI Studio.
         </p>
 
         <div class="form-group">

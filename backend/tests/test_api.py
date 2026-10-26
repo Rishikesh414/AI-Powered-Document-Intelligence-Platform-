@@ -89,7 +89,8 @@ def test_analyze_resume():
     assert len(data["summary"]) > 50
     assert "charts_data" in data["visual_insights"]
     assert "skills_distribution" in data["visual_insights"]["charts_data"]
-    assert data["visual_insights"]["ai_infographic_url"] is not None
+    assert data["visual_insights"]["ai_infographic_svg"] is not None
+    assert "<svg" in data["visual_insights"]["ai_infographic_svg"]
 
 
 def test_analyze_missing_fields_resume():
