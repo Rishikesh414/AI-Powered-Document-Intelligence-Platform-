@@ -74,7 +74,14 @@ async def analyze(
     infographic_url = generate_infographic_url(extraction, request.document_type)
 
     summary = extraction.get("summary", "")
-    uncertainty_flags = extraction.get("uncertainty_flags", [])
+    uncertainty_flags = list(extraction.get("uncertainty_flags", []))
+
+    # Auto-flag incomplete or missing dimensions detected by completeness scorer
+    for dim in completeness_breakdown:
+        if dim.score < 60.0:
+            flag_msg = f"Missing or incomplete required data for {dim.dimension} ({dim.label})"
+            if not any(dim.dimension in f.lower() for f in uncertainty_flags):
+                uncertainty_flags.append(flag_msg)
 
     # 5. Persist Analysis Record in PostgreSQL
     try:

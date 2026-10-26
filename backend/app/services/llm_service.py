@@ -232,7 +232,7 @@ async def analyze_document(
     else:
         try:
             result = await _call_gemini(prompt, document_type)
-            if "Error calling LLM" in result.get("summary", ""):
+            if "Error" in result.get("summary", "") or not result.get("summary"):
                 logger.warning("Gemini call returned error payload, falling back to mock analysis")
                 result = _mock_analysis(document_text, document_type, summary_style)
         except Exception as e:
@@ -256,7 +256,7 @@ async def _call_gemini(prompt: str, document_type: str) -> Dict[str, Any]:
             prompt,
             generation_config=genai.GenerationConfig(
                 temperature=0.1,
-                max_output_tokens=4096,
+                max_output_tokens=8192,
                 response_mime_type="application/json",
             ),
         )
