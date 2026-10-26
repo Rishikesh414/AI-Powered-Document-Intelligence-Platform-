@@ -3,25 +3,6 @@
 > **An interactive, polymorphic AI document intelligence platform built with FastAPI, Nuxt 3 (Vue 3), Google Gemini 2.5 Flash, PostgreSQL (with SQLite backup), and Pydantic v2.**  
 > Automatically ingests unstructured documents (PDF, TXT, DOCX), extracts typed polymorphic entities, generates multi-style summaries, computes weighted multi-dimensional completeness scores ($C_{\text{total}}$), and renders domain-specific SVG charts and AI infographics.
 
----
-
-## 📌 Project Submission & Candidate Metadata
-
-- **Candidate Name**: **Rishikesh.K**
-- **Register Number**: `921023205015`
-- **Institution**: Nadar Saraswathi College of Engineering and Technology
-- **Department**: Information Technology (4th Year / Class of 2027)
-- **Email**: [rrishikesh414@gmail.com](mailto:rrishikesh414@gmail.com) | **Mobile**: +91 8190814649
-- **Chosen Task**: **Task 2 — AI-Powered Document Intelligence Platform**
-- **Live Frontend Demo**: [https://document-intelligence-frontend-two.vercel.app](https://document-intelligence-frontend-two.vercel.app)
-- **GitHub Repository**: [https://github.com/Rishikesh414/AI-Powered-Document-Intelligence-Platform-.git](https://github.com/Rishikesh414/AI-Powered-Document-Intelligence-Platform-.git)
-- **API Documentation**: [Swagger UI (`/docs`)](https://document-intelligence-frontend-two.vercel.app) (available on backend `/docs`)
-
----
-
-## 📄 Resume Project Showcase (For Portfolio & CV)
-
-> **Copy-pasteable entry for Resume / LinkedIn Experience section:**
 
 ### **AI-Powered Document Intelligence Platform**
 *Full-Stack & Applied AI Engineer | FastAPI, Nuxt 3, Google Gemini 2.5 Flash, PostgreSQL, Pydantic v2*
@@ -501,6 +482,4 @@ python -m pytest tests/ -v
 
 ---
 
-## ⚖️ License
 
-Developed as part of the **AI-Powered Document Intelligence Platform** technical assessment (Task 2) by **Rishikesh.K**. Distributed under the [MIT License](LICENSE).
